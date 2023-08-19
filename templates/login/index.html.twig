@@ -7,7 +7,7 @@
     {% endfor %}
 
     {% if error %}
-    <div>{{ error.messageKey }}</div>
+    <div>{{  error.messageKey|trans({}, 'security')  }}</div>
     {% endif %}
 
 <form action="{{ path('app_login') }}" method="post">

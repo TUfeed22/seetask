@@ -20,7 +20,12 @@ class LoginController extends AbstractController
         //$form = $this->createForm(LoginFormType::class);
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-
+        $errorMessage = '';
+/*
+        if ($error->getMessageKey() == 'Invalid credentials.') {
+            $errorMessage = 'Неверные почта или пароль';
+        }
+*/
         return $this->render('login/index.html.twig', [
             'title' => 'Вход',
             'last_username' => $lastUsername,
