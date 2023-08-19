@@ -15,7 +15,14 @@
         <div id="auth">
             <div class="row h-100">
                 <div class="col-lg-5 col-12">
-                    {% block body %}{% endblock %}
+                    <div id="auth-left">
+                        <div class="auth-logo">
+                            <a href="{{ path('app_index') }}"><img src="{{ asset('assets/images/logo/logo.svg') }}" alt="See Task"></a>
+                        </div>
+                        <h1 class="auth-title">{{ title }}</h1>
+                        {% block body %}{% endblock %}
+                    </div>
+
                 </div>
                 <div class="col-lg-7 d-none d-lg-block">
                     <div id="auth-right"></div>

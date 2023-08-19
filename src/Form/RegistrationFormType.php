@@ -48,7 +48,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'attr' => ['class' => 'form-check-input', 'placeholder' => 'Пароль'],
+                'attr' => ['class' => 'form-check-input'],
                 'label' => false,
                 'mapped' => false,
                 'constraints' => [
