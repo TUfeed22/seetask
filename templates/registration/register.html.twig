@@ -1,28 +1,55 @@
-{% extends 'base.html.twig' %}
+{% extends 'registration/base.html.twig' %}
 
-{% block title %}Register{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <div id="auth-left">
+        <div class="auth-logo">
+            <a href="index.html"><img src="assets/images/logo/logo.svg" alt="Logo"></a>
+        </div>
+        <h1 class="auth-title">{{ title }}</h1>
 
-    {{ form_errors(registrationForm) }}
+        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email, {
-            label: 'Email'
-        }) }}
-        {{ form_row(registrationForm.username, {
-            label: 'User name'
-        }) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_start(registrationForm) }}
 
-        <button type="submit" class="btn">Регистрация</button>
-    {{ form_end(registrationForm) }}
+                <div class="form-group position-relative has-icon-left mb-4">
+                    {{ form_widget(registrationForm.email) }}
+                    <div class="form-control-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                </div>
+
+                <div class="form-group position-relative has-icon-left mb-4">
+                    {{ form_widget(registrationForm.username) }}
+                    <div class="form-control-icon">
+                        <i class="bi bi-person"></i>
+                    </div>
+                </div>
+
+
+                <div class="form-group position-relative has-icon-left mb-4">
+                    {{ form_widget(registrationForm.plainPassword) }}
+                    <div class="form-control-icon">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+                </div>
+                <div class="form-check">
+                    <div class="checkbox">
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        
+                        <label for="checkbox1">Принять условия на обработку персональных данных.</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Регистрация</button>
+            {{ form_end(registrationForm) }}
+
+        <div class="text-center mt-5 text-lg fs-4">
+            <p class='text-gray-600'>Уже есть аккаунт? <a href="auth-login.html" class="font-bold">Войти</a>.</p>
+        </div>
+    </div>
 {% endblock %}

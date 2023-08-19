@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('assets/css/main/app.css') }}">
+            <link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon.svg') }}" type="image/x-icon">
+            <link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon.png') }}" type="image/png">
         {% endblock %}
-
-        {% block javascripts %}
-        {% endblock %}
+        <title>{% block title %}See Task - {{ title }}{% endblock %}</title>
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="app">
+            <div id="main" class="layout-horizontal">
+                {{ include('default/header.html.twig') }}
+                {% block body %}{% endblock %}
+                {{ include('default/footer.html.twig') }}
+            </div>
+        </div>
+
+        {% block javascripts %}
+            <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+            <script src="{{ asset('assets/js/app.js') }}"></script>
+            <script src="{{ asset('assets/js/pages/horizontal-layout.js') }}"></script>
+            <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+            <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
