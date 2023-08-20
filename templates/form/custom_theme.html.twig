@@ -1,0 +1,21 @@
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        {% if compound %}
+            {# ... отобразить глобальные ошибки формы #}
+                {% for error in errors %}
+                    <div class="alert alert-light-danger color-danger">
+                    <i class="bi bi-exclamation-circle"></i>
+                        {{ error.message }}
+                    </div>
+                {% endfor %}
+        {% else %}
+            {# ... отобразить ошибки для одного поля #}
+            <div class="alert alert-light-danger color-danger">
+                <i class="bi bi-exclamation-circle"></i>
+                {% for error in errors %}
+                    {{ error.message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock form_errors %}
