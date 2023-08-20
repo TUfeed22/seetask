@@ -1,0 +1,5 @@
+role_name:
+    ROLE_ADMIN: 'Администратор'
+    ROLE_SUPER_ADMIN: 'Супер администратор'
+    ROLE_USER: 'Пользователь'
+    ROLE_MANAGER: 'Менеджер'

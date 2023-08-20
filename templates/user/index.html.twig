@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content-wrapper container">
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        <h3>{{ title }}</h3>
+                    </div>
+                </div>
+            </div>
+            <section class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="">Основная информация</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-xl-4">
+                                <div class="">
+                                    <img class="card-img-top card-img-bottom img-fluid" src="{{ asset('assets/images/samples/origami.jpg') }}" alt="Card image cap" style="height: 20rem">
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-8">
+                                <div class="card-text m-3 fs-5 px-5">
+                                    <b>Имя:</b> {{ app.user.username }}
+                                </div>
+                                <div class="card-text m-3 fs-5 px-5">
+                                    <b>Email:</b> {{ app.user.email }}
+                                </div>
+                                <div class="card-text m-3 fs-5 px-5">
+                                    <b>Роли: </b>
+                                    {% for role_name in role_names %}
+                                        {{ role_name }},
+                                    {% endfor %}
+                                </div>
+                                <div class="card-text m-3 fs-5 px-5">
+                                    <b>Номер телефона:</b>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">Редактировать</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+{% endblock %}
