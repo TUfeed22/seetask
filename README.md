@@ -34,3 +34,30 @@
     {{ form_end(form) }}
 
 Здесь для вывода элемента формы, мы вместо ```form_row()``` используем ```form_widget()```. Блягодаря этому мы можем аккуратно внедрить форму в готовый макет и не сломать верстку.
+
+
+## Система ролей
+Пока используется стандартная в symfony система ролей.
+В БД роли хранятся массивом в колонке ```roles```.
+
+Чтобы получить роль текущего пользователя:
+
+    $user = $this->getUser();
+    $roles = $user->getRoles();
+
+В файле ```config/packages/security.yml``` можно настроить иерархию ролей:
+
+    security:
+        ....
+
+        firewalls:
+            ...
+        
+        role_hierarchy:
+            ROLE_ADMIN: ROLE_USER
+            ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+Пользователи с ролью `ROLE_ADMIN` также будут иметь роль `ROLE_USER`. 
+Пользователи с `ROLE_SUPER_ADMIN`, автоматически будут иметь `ROLE_ADMIN`, `ROLE_ALLOWED_TO_SWITCH` и `ROLE_USER` (унаследовано от `ROLE_ADMIN`).
+
+Но чтобы иерархия работала, для проверки роли, лучше вместо `getRoles()` использовать `$this->isGranted('ROLE_ADMIN')`
