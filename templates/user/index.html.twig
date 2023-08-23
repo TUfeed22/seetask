@@ -30,13 +30,10 @@
                                     <b>Email:</b> {{ app.user.email }}
                                 </div>
                                 <div class="card-text m-3 fs-5 px-5">
-                                    <b>Роли: </b>
-                                    {% for role_name in role_names %}
-                                        {{ role_name }},
-                                    {% endfor %}
+                                    <b>Роли: </b> {{ role_names }}
                                 </div>
                                 <div class="card-text m-3 fs-5 px-5">
-                                    <b>Номер телефона:</b>
+                                    <b>Номер телефона:</b> {{ app.user.phone }}
                                 </div>
 
                             </div>

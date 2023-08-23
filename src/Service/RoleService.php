@@ -21,7 +21,7 @@ class RoleService
      * @param $roles array роли пользователя
      * @throws Exception
      */
-    public function getRoleName(array $roles): array
+    public function getRoleName(array $roles): string
     {
         $roleNames = $this->parseYaml('/config/role_name.yaml');
 
@@ -30,7 +30,7 @@ class RoleService
             $roleName[] = $roleNames['role_name'][$role];
         }
 
-        return $roleName;
+        return implode(', ', $roleName);
     }
 
     /**
