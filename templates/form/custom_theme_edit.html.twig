@@ -1,0 +1,23 @@
+{% block form_row %}
+
+    <div class="col-12">
+        <div class="form-group has-icon-left">
+            <div class="position-relative">
+
+                {% block _user_username_widget %}
+                    <input type="text" class="form-control" id="{{ attr.id }}" value="{{ attr.value }}">
+                {% endblock %}
+                <div class="form-control-icon">
+                    <i class="bi bi-person"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block  form_label %}
+    <div class="col-md-4">
+
+    </div>
+{% endblock %}

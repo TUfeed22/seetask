@@ -1,51 +1,98 @@
 {% extends 'base.html.twig' %}
 
+{% block page_header %}
+
+    <div class="page-heading">
+        <h3>{{ title }}</h3>
+    </div>
+
+{% endblock %}
+
 {% block body %}
-    <div class="content-wrapper container">
-        <div class="page-heading">
-            <div class="page-title">
-                <div class="row">
-                    <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>{{ title }}</h3>
-                    </div>
-                </div>
-            </div>
-            <section class="section">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="">Основная информация</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 col-xl-4">
-                                <div class="">
-                                    <img class="card-img-top card-img-bottom img-fluid" src="{{ asset('assets/images/samples/origami.jpg') }}" alt="Card image cap" style="height: 20rem">
-                                </div>
+    <section class="row">
+        <div class="col-12 col-lg-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="avatar-box avatar avatar-xxl">
+                                <img src="{{ asset("assets/images/faces/2.jpg") }}" alt="Avatar">
                             </div>
-                            <div class="col-12 col-xl-8">
-                                <div class="card-text m-3 fs-5 px-5">
-                                    <b>Имя:</b> {{ app.user.username }}
-                                </div>
-                                <div class="card-text m-3 fs-5 px-5">
-                                    <b>Email:</b> {{ app.user.email }}
-                                </div>
-                                <div class="card-text m-3 fs-5 px-5">
-                                    <b>Роли: </b> {{ role_names }}
-                                </div>
-                                <div class="card-text m-3 fs-5 px-5">
-                                    <b>Номер телефона:</b> {{ app.user.phone }}
-                                </div>
+                        </div>
 
+                        <div class="card-body">
+                            <div class="text-lg-center text-md-center text-sm-center text-xs-center">
+                                <div class="card-row pt-2">
+                                    <h4>{{ app.user.username }}</h4>
+                                </div>
+                                <div class="card-row pb-2">
+                                    <div class="badge badge-pill bg-light-success me-1">{{ role_names }}</div>
+                                </div>
+                                <div class="card-row pt-4 pb-2">
+                                    <a href="#" class="btn btn-outline-warning btn-lg">Редактировать</a>
+                                </div>
                             </div>
 
-                            <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary me-1 mb-1">Редактировать</button>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-    </div>
+        <div class="col-12 col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Управление</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="buttons">
+                                <a href="#" class="btn btn-primary">Сменить пароль</a>
+                                <a href="#" class="btn btn-danger">Удалить профиль</a>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Основная информация</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="fs-5 pb-3">
+                                        <b>E-mail:</b>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="fs-5 pb-3">
+                                        {{ app.user.email }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="fs-5 pb-3">
+                                        <b>Телефон:</b>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="fs-5 pb-3">
+                                        {{ app.user.phone }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

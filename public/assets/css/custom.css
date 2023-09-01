@@ -1,0 +1,32 @@
+.avatar-box {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    padding-top: 20px;
+    display: block!important;
+}
+
+.avatar.avatar-xxl .avatar-content, .avatar.avatar-xxl img {
+    font-size: 2rem;
+    height: 240px;
+    width: 240px;
+    margin: auto 0;
+}
+
+body.theme-dark .avatar.avatar-xxl .avatar-content, body.theme-dark .avatar.avatar-xxl img {
+    font-size: 2rem;
+    height: 240px;
+    width: 240px;
+    margin: auto 0;
+}
+
+body.theme-dark .buttons .btn, .buttons .btn {
+    margin: 0 10px 0 0!important;
+}
+
+@media (min-width: 500px){
+    .text-xs-center {
+        text-align: center!important;
+    }
+}

@@ -1,0 +1,12 @@
+{% extends 'components/ModalWindow.html.twig' %}
+
+{% block body %}
+
+    {% form_theme editUserForm 'form/custom_theme_edit.html.twig' %}
+
+    {{ form_start(editUserForm) }}
+
+        {{ form_row(editUserForm.username) }}
+
+    {{ form_end(editUserForm) }}
+{% endblock %}
