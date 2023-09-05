@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 
+use App\Controller\BaseController;
 use App\Entity\User;
 use App\Form\EditUserFormType;
 use App\Service\RoleService;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[IsGranted('IS_AUTHENTICATED')]
-class UserController extends AbstractController
+class UserController extends BaseController
 {
     /**
      * @throws Exception

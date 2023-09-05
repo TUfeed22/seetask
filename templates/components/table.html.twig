@@ -1,32 +1,12 @@
-<section class="section">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="buttons">
-                    <a href="{{ path('app_project_add') }}" class="btn btn-outline-success">Новый проект</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            {{ title }}
-        </div>
+<table class="table" id="projects">
+    <thead>
+    <tr>
+        {% for name in columnNames %}
+            <th>{{ name }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
 
-        <div class="card-body">
-            <table class="table" id="projects">
-                <thead>
-                <tr>
-                    {% for name in columnNames %}
-                        <th>{{ name }}</th>
-                    {% endfor %}
-                </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</section>
+    </tbody>
+</table>

@@ -9,7 +9,6 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class Table
 {
     public array $columnNames;
-    public string $title;
     public $entity;
 
     public function mount($columnNames)

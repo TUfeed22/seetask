@@ -9,5 +9,10 @@
 {% endblock %}
 
 {% block body %}
-
+    <p>Проекты:</p>
+    <ul>
+        {% for project in projects %}
+        <li>{{ project.name }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
