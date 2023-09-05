@@ -63,12 +63,12 @@ class Project
         return $this;
     }
 
-    public function getcreator(): ?User
+    public function getCreator(): ?User
     {
         return $this->creator;
     }
 
-    public function setcreator(?User $creator): static
+    public function setCreator(?User $creator): static
     {
         $this->creator = $creator;
 
