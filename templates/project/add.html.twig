@@ -15,10 +15,18 @@
             <div class="card-body">
                 {{ form_start(addProjectForm) }}
 
-                    {{ form_widget(addProjectForm.name) }}
+                    <div class="form-group">
+                        {{ form_widget(addProjectForm.name) }}
+                    </div>
+                    <div class="form-floating">
+                        {{ form_widget(addProjectForm.description) }}
+                        {{ form_label(addProjectForm.description, 'Описание проекта') }}
+                    </div>
 
-                    {{ form_widget(addProjectForm.description) }}
-                    <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Сохранить</button>
+                    <div class="col-sm-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary mt-5">Сохранить</button>
+                    </div>
+
                 {{ form_end(addProjectForm) }}
             </div>
         </div>

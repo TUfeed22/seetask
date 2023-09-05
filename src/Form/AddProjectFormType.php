@@ -17,14 +17,17 @@ class AddProjectFormType extends AbstractType
             ->add('name', TextType::class, [
                 'attr' => [
                     'id' => 'custom-id',
-                    'placeholder' => 'Название проекта'
+                    'placeholder' => 'Название проекта',
+                    'class' => 'form-control'
                 ],
             ])
             ->add('description', TextareaType::class, [
                 'attr' => [
                     'id' => 'custom-id',
-                    'placeholder' => 'Описание проекта'
+                    'placeholder' => 'Описание проекта',
+                    'class' => 'form-control form-control-height',
                 ],
+                'required' => false
             ])
         ;
     }

@@ -19,8 +19,10 @@ class ProjectController extends BaseController
     #[Route('/projects', name: 'app_project')]
     public function index(): Response
     {
+
         return $this->render('project/index.html.twig', [
             'title' => 'Проекты',
+            'projects' => $this->getCurrentUser()->getProjects()
         ]);
     }
 
@@ -42,6 +44,8 @@ class ProjectController extends BaseController
             $this->getCurrentUser()->addProject($project);
             $entityManager->persist($project);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_project');
         }
 
         return $this->render('project/add.html.twig', [
