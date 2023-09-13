@@ -1,3 +1,4 @@
+{% if data|length > 0 %}
 <table class="table" id="projects">
     <thead>
     <tr>
@@ -27,3 +28,8 @@
 
     </tbody>
 </table>
+    {% else %}
+        <div class="divider">
+            <div class="divider-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проектов нет. Создай новый.</font></font></div>
+        </div>
+{% endif %}

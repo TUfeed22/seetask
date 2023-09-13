@@ -76,6 +76,10 @@ class ProjectController extends BaseController
     #[Route('project/update/{id}', name: 'app_project_update', methods: ['GET', 'POST'])]
     public function update(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
+        /**
+         * @var Project $project
+         */
+
         $project = $entityManager->find(Project::class, $id);
 
         $form = $this->createForm(AddAndUpdateProjectFormType::class, $project);
@@ -103,7 +107,12 @@ class ProjectController extends BaseController
     #[Route('project/delete/{id}', name: 'app_project_delete', methods: ['GET'])]
     public function delete(int $id, EntityManagerInterface $entityManager): Response
     {
+        /**
+         * @var Project $project
+         */
+
         $project = $entityManager->find(Project::class, $id);
+
         $entityManager->remove($project);
         $entityManager->flush();
 
