@@ -5,7 +5,7 @@ namespace App\Controller\Project;
 use App\Controller\BaseController;
 use App\Entity\Project;
 use App\Enum\Status;
-use App\Form\AddProjectFormType;
+use App\Form\AddAndUpdateProjectFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +38,7 @@ class ProjectController extends BaseController
     {
         $project = new Project();
 
-        $form = $this->createForm(AddProjectFormType::class, $project);
+        $form = $this->createForm(AddAndUpdateProjectFormType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -78,7 +78,7 @@ class ProjectController extends BaseController
     {
         $project = $entityManager->find(Project::class, $id);
 
-        $form = $this->createForm(AddProjectFormType::class, $project);
+        $form = $this->createForm(AddAndUpdateProjectFormType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
