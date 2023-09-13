@@ -60,6 +60,13 @@ class ProjectController extends BaseController
 
     }
 
+    /**
+     * Просмотр проекта
+     *
+     * @param int $id
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('project/show/{id}', name: 'app_project_show', methods: ['GET'])]
     public function show(int $id, EntityManagerInterface $entityManager): Response
     {
@@ -73,6 +80,14 @@ class ProjectController extends BaseController
         ]);
     }
 
+    /**
+     * Обновить проект
+     *
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('project/update/{id}', name: 'app_project_update', methods: ['GET', 'POST'])]
     public function update(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -104,6 +119,13 @@ class ProjectController extends BaseController
         ]);
     }
 
+    /**
+     * Удалить проект
+     *
+     * @param int $id
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('project/delete/{id}', name: 'app_project_delete', methods: ['GET'])]
     public function delete(int $id, EntityManagerInterface $entityManager): Response
     {
