@@ -29,6 +29,9 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Task::class)]
     private Collection $tasks;
 
+    #[ORM\Column(length: 25)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -101,6 +104,18 @@ class Project
                 $task->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

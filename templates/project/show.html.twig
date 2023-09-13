@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+
+{% block page_header %}
+
+    <div class="page-heading">
+        <h3>{{ project.name }}</h3>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="section">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="buttons">
+                        <a href="{{ path('app_project_update', {'id': project.id}) }}" class="btn btn-outline-primary">Редактировать</a>
+                        <a href="{{ path('app_project_delete', {'id': project.id}) }}" class="btn btn-outline-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Описание
+            </div>
+            <div class="card-body">
+                {{ project.description }}
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
+

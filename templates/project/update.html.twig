@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+{% block page_header %}
+
+    <div class="page-heading">
+        <h3>Редактирование: {{ title }}</h3>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                {{ form_start(addProjectForm) }}
+
+                <div class="form-group">
+                    {{ form_widget(addProjectForm.name, {'value': project.name}) }}
+                </div>
+                <div class="form-floating">
+                    {{ form_widget(addProjectForm.description, {'value': project.description}) }}
+                    {{ form_label(addProjectForm.description, 'Описание проекта') }}
+                </div>
+
+                <div class="col-sm-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary mt-5">Сохранить</button>
+                </div>
+
+                {{ form_end(addProjectForm) }}
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

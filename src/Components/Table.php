@@ -10,10 +10,8 @@ class Table
 {
     public array $columnNames;
     public $entity;
+    public $data;
 
-    /**
-     * @var Service
-     */
     private Service $service;
     public function __construct(Service $service)
     {
@@ -23,7 +21,7 @@ class Table
     public function mount($columnNames, $entity)
     {
         if ($entity === 'project' ) {
-            $this->entity = $this->service->getCurrentUser()->getProjects();
+            $this->data = $this->service->getCurrentUser()->getProjects();
         }
         $this->columnNames = explode(',', $columnNames);
     }

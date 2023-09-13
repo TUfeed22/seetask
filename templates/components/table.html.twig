@@ -7,13 +7,21 @@
     </tr>
     </thead>
     <tbody>
-        {% for project in entity %}
+        {% for item in data %}
             <tr>
-                <td>{{ project.id }}</td>
-                <td>{{ project.name }}</td>
-                <td>0</td>
-                <td>Новый</td>
-                <td>{{ project.creator.username }}</td>
+                <td>{{ item.id }}</td>
+                <td><a href="{{ path('app_project_show', {'id': item.id}) }}">{{ item.name }}</a></td>
+                <td>{{ item.tasks|length }}</td>
+                <td>
+                    {% if item.status == 'Новый' %}
+                        <span class="badge bg-success" style="color: black">{{ item.status }}</span>
+                    {% elseif item.status == 'В работе' %}
+                        <span class="badge bg-warning" style="color: black">{{ item.status }}</span>
+                    {% else %}
+                        <span class="badge bg-primary" style="color: black">{{ item.status }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ item.creator.username }}</td>
             </tr>
         {% endfor %}
 
