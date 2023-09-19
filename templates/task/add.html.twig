@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block page_header %}
+
+    <div class="page-heading">
+        <h3>{{ title }}</h3>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                {{ form_start(addAndUpdateTaskForm) }}
+
+                <div class="form-group">
+                    {{ form_widget(addAndUpdateTaskForm.name) }}
+                </div>
+                <div class="form-floating form-group">
+                    {{ form_widget(addAndUpdateTaskForm.description) }}
+                    {{ form_label(addAndUpdateTaskForm.description, 'Описание задачи') }}
+                </div>
+
+                <fieldset class="form-group">
+                    {{ form_widget(addAndUpdateTaskForm.project) }}
+                </fieldset>
+
+                <div class="col-sm-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary mt-5">Сохранить</button>
+                </div>
+
+                {{ form_end(addAndUpdateTaskForm) }}
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

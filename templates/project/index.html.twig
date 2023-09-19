@@ -23,10 +23,44 @@
         </div>
         <div class="card">
             <div class="card-body">
-                {{ component('Table', {
-                    columnNames: '#,Наименование,Кол-во задач,Статус,Создатель',
-                    entity: 'project'
-                }) }}
+                {% if projects|length > 0 %}
+                    <table class="table" id="projects">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Наименование</td>
+                            <td>Кол-во задач</td>
+                            <td>Статус</td>
+                            <td>Создатель</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for project in projects %}
+                            <tr>
+                                <td>{{ project.id }}</td>
+                                <td><a href="{{ path('app_project_show', {'id': project.id}) }}">{{ project.name }}</a></td>
+                                <td>{{ project.tasks|length }}</td>
+                                <td>
+                                    {% if project.status == 'Новый' %}
+                                        <span class="badge bg-success" style="color: black">{{ project.status }}</span>
+                                    {% elseif project.status == 'В работе' %}
+                                        <span class="badge bg-warning" style="color: black">{{ project.status }}</span>
+                                    {% else %}
+                                        <span class="badge bg-primary" style="color: black">{{ project.status }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ project.creator.username }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="divider">
+                        <div class="divider-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ничего не найдено.</font></font></div>
+                    </div>
+                {% endif %}
             </div>
         </div>
 

@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
 {% block page_header %}
 
     <div class="page-heading">
@@ -10,4 +11,61 @@
 
 {% block body %}
 
+    <section class="section">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="buttons">
+                        <a href="{{ path('app_task_add') }}" class="btn btn-outline-success">Новая задача</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                {% if tasks|length > 0 %}
+                    <table class="table" id="projects">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Наименование</td>
+                            <td>Проект</td>
+                            <td>Статус</td>
+                            <td>Создатель</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for task in tasks %}
+                            <tr>
+                                <td>{{ task.id }}</td>
+                                <td><a href="{{ path('app_task_show', {'id': task.id}) }}">{{ task.name }}</a></td>
+                                <td>{{ task.project.name }}</td>
+                                <td>
+                                    {% if task.status == 'Новый' %}
+                                        <span class="badge bg-success" style="color: black">{{ task.status }}</span>
+                                    {% elseif task.status == 'В работе' %}
+                                        <span class="badge bg-warning" style="color: black">{{ task.status }}</span>
+                                    {% else %}
+                                        <span class="badge bg-primary" style="color: black">{{ task.status }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ task.creator.username }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="divider">
+                        <div class="divider-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ничего не найдено.</font></font></div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+
+
 {% endblock %}
+
