@@ -21,6 +21,7 @@ class Task
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Project $project = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]

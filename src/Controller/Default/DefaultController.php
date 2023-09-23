@@ -17,7 +17,8 @@ class DefaultController extends BaseController
         $user = $this->getCurrentUser();
         return $this->render('default/index.html.twig', [
             'title' => 'Информационная панель',
-            'projects' => $user->getProjects()
+            'projects' => $user->getProjects(),
+            'tasks' => $user->getTasks(),
         ]);
     }
 }

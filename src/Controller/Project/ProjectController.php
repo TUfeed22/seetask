@@ -136,6 +136,7 @@ class ProjectController extends BaseController
         $project = $entityManager->find(Project::class, $id);
 
         $entityManager->remove($project);
+
         $entityManager->flush();
 
         return $this->redirectToRoute('app_project');

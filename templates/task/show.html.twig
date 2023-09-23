@@ -30,14 +30,16 @@
                 {{ task.description }}
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                Проект
+        {% if task.project %}
+            <div class="card">
+                <div class="card-header">
+                    Проект
+                </div>
+                <div class="card-body">
+                    {{ task.project.name }}
+                </div>
             </div>
-            <div class="card-body">
-                {{ task.project.name }}
-            </div>
-        </div>
+        {% endif %}
 
     </section>
 

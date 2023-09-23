@@ -40,7 +40,13 @@
                             <tr>
                                 <td>{{ task.id }}</td>
                                 <td><a href="{{ path('app_task_show', {'id': task.id}) }}">{{ task.name }}</a></td>
-                                <td>{{ task.project.name }}</td>
+                                <td>
+                                    {% if task.project%}
+                                        <a href="{{ path('app_project_show', {'id': task.project.id}) }}">{{ task.project.name }}</a>
+                                    {% else %}
+                                        Отсутствует
+                                    {% endif %}
+                                </td>
                                 <td>
                                     {% if task.status == 'Новый' %}
                                         <span class="badge bg-success" style="color: black">{{ task.status }}</span>
