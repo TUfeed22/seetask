@@ -33,7 +33,8 @@ class AddAndUpdateTaskFormType extends AbstractType
             ->add('project', SelectType::class, [
                 'attr' => [
                     'class' => 'form-select'
-                ]
+                ],
+                'choices' => $options['options'], // список имен проектов для select
             ]);
     }
 
@@ -41,6 +42,7 @@ class AddAndUpdateTaskFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Task::class,
+            'options' => [], // по умолчанию
         ]);
     }
 }

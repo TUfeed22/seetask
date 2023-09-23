@@ -24,4 +24,6 @@ class Service
         $user = $this->security->getUser();
         return $user;
     }
+
+
 }

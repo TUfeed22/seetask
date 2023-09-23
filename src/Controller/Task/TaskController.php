@@ -35,8 +35,20 @@ class TaskController extends BaseController
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
         $task = new Task();
+        // параметры для выпадающего списка проектов
+        $options = [
+            'options' => [
+                'Выбрать проект' => null // если проект не нужен
+            ],
+        ];
 
-        $form = $this->createForm(AddAndUpdateTaskFormType::class, $task);
+        $projects = $this->getCurrentUser()->getProjects();
+        // формируем список проектов доступных текущему пользователю
+        foreach ($projects as $project) {
+            $options['options'][$project->getName()] = $project;
+        }
+
+        $form = $this->createForm(AddAndUpdateTaskFormType::class, $task, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -67,6 +79,41 @@ class TaskController extends BaseController
         return $this->render('task/show.html.twig', [
             'title' => $task->getName(),
             'task' => $task
+        ]);
+    }
+
+    /**
+     * Обновить проект
+     *
+     * @param int $id
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    #[Route('task/update/{id}', name: 'app_task_update', methods: ['GET', 'POST'])]
+    public function update(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        /**
+         * @var Task $task
+         */
+
+        $task = $entityManager->find(Task::class, $id);
+
+        $form = $this->createForm(AddAndUpdateTaskFormType::class, $task);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->persist($task);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_task_show', ['id' => $id]);
+        }
+
+        return $this->render('task/update.html.twig', [
+            'title' => $task->getName(),
+            'task' => $task,
+            'addTaskForm' => $form->createView()
         ]);
     }
 }

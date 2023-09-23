@@ -14,7 +14,7 @@ class BaseController extends AbstractController
     protected function getCurrentUser(): User
     {
         /**
-         * @var \App\Entity\User $user
+         * @var User $user
          */
         $user = $this->getUser();
         return $user;
