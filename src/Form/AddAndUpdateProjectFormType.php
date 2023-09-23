@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Project;
+use App\Form\Type\SelectType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,13 +30,20 @@ class AddAndUpdateProjectFormType extends AbstractType
                 ],
                 'required' => false
             ])
-        ;
+            ->add('status', SelectType::class, [
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+                'choices' => $options['options'], // статусы для select
+                'label' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Project::class,
+            'options' => []
         ]);
     }
 }

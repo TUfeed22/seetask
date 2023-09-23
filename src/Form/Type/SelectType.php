@@ -17,20 +17,6 @@ class SelectType extends AbstractType
     {
         $this->service = $service;
     }
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-/*
-        // список проектов доступные текущему пользователю
-        $products = $this->service->getCurrentUser()->getProjects();
-        foreach ($products as $product) {
-            $options[$product->getName()] = $product;
-        }
-
-        $resolver->setDefaults([
-            'choices' => $options
-        ]);
-*/
-    }
 
     public function getParent(): string
     {

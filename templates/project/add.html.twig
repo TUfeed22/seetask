@@ -18,10 +18,14 @@
                     <div class="form-group">
                         {{ form_widget(addProjectForm.name) }}
                     </div>
-                    <div class="form-floating">
+                    <div class="form-floating form-group">
                         {{ form_widget(addProjectForm.description) }}
                         {{ form_label(addProjectForm.description, 'Описание проекта') }}
                     </div>
+
+                    <fieldset class="form-group">
+                        {{ form_widget(addProjectForm.status) }}
+                    </fieldset>
 
                     <div class="col-sm-12 d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary mt-5">Сохранить</button>

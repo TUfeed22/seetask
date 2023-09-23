@@ -20,7 +20,6 @@ class ProjectController extends BaseController
     #[Route('/projects', name: 'app_project')]
     public function index(): Response
     {
-
         return $this->render('project/index.html.twig', [
             'title' => 'Проекты',
             'projects' => $this->getCurrentUser()->getProjects()
@@ -38,15 +37,12 @@ class ProjectController extends BaseController
     {
         $project = new Project();
 
-        $form = $this->createForm(AddAndUpdateProjectFormType::class, $project);
+        $form = $this->createForm(AddAndUpdateProjectFormType::class, $project, Status::getOptionsToSelect());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Добавить проект привязав к текущему пользователю
             $this->getCurrentUser()->addProject($project);
-            // По умолчанию статус Новый
-            $project->setStatus(Status::New->value);
-
             $entityManager->persist($project);
             $entityManager->flush();
 
@@ -97,15 +93,11 @@ class ProjectController extends BaseController
 
         $project = $entityManager->find(Project::class, $id);
 
-        $form = $this->createForm(AddAndUpdateProjectFormType::class, $project);
+        $form = $this->createForm(AddAndUpdateProjectFormType::class, $project, Status::getOptionsToSelect());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Добавить проект привязав к текущему пользователю
-            $this->getCurrentUser()->addProject($project);
-            // По умолчанию статус Новый
-            $project->setStatus(Status::New->value);
-
             $entityManager->persist($project);
             $entityManager->flush();
 

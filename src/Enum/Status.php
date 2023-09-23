@@ -2,11 +2,27 @@
 
 namespace App\Enum;
 
+use PhpParser\Node\Expr\Array_;
+
 enum Status: string
 {
-    case New = 'Новый';
-    case Work = 'В работе';
-    case Suspended = 'Приостановлен';
-    case Done = 'Выполнен';
-    case Cancelled = 'Отменен';
+    case new = 'Новый';
+    case work = 'В работе';
+    case suspended = 'Приостановлено';
+    case done = 'Выполнено';
+    case cancelled = 'Отменено';
+
+    /**
+     * Возвращает массив пригодный для формирования select для формы
+     *
+     * @return array
+     */
+    public static function getOptionsToSelect(): array
+    {
+        $options = [];
+        foreach (Status::cases() as $status) {
+            $options['options'][$status->value] = $status->value;
+        }
+        return $options;
+    }
 }
