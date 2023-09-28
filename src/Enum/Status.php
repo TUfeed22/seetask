@@ -2,8 +2,6 @@
 
 namespace App\Enum;
 
-use PhpParser\Node\Expr\Array_;
-
 enum Status: string
 {
     case new = 'Новый';
@@ -21,8 +19,20 @@ enum Status: string
     {
         $options = [];
         foreach (Status::cases() as $status) {
-            $options['options'][$status->value] = $status->value;
+            $options['options'][$status->value] = $status->name;
         }
         return $options;
+    }
+
+    public static function render($status): string
+    {
+        return match ($status) {
+            Status::new->name => '<span class="badge bg-info" style="color: #000000">' . Status::new->value . '</span>',
+            Status::work->name => '<span class="badge bg-primary" style="color: #000000">' . Status::work->value . '</span>',
+            Status::suspended->name => '<span class="badge bg-warning" style="color: #000000">' . Status::suspended->value . '</span>',
+            Status::done->name => '<span class="badge bg-success" style="color: #090909">' . Status::done->value . '</span>',
+            Status::cancelled->name => '<span class="badge bg-danger" style="color: #050505">' . Status::cancelled->value . '</span>',
+            default => '<span class="badge bg-secondary" style="color: #000000">' . $status . '</span>',
+        };
     }
 }

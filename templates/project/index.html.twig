@@ -42,13 +42,9 @@
                                 <td><a href="{{ path('app_project_show', {'id': project.id}) }}">{{ project.name }}</a></td>
                                 <td>{{ project.tasks|length }}</td>
                                 <td>
-                                    {% if project.status == 'Новый' %}
-                                        <span class="badge bg-success" style="color: black">{{ project.status }}</span>
-                                    {% elseif project.status == 'В работе' %}
-                                        <span class="badge bg-warning" style="color: black">{{ project.status }}</span>
-                                    {% else %}
-                                        <span class="badge bg-primary" style="color: black">{{ project.status }}</span>
-                                    {% endif %}
+                                  {{ component('StatusComponent', {
+                                      status: project.status
+                                  }) }}
                                 </td>
                                 <td>{{ project.creator.username }}</td>
                             </tr>

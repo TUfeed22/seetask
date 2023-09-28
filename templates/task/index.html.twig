@@ -48,13 +48,9 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if task.status == 'Новый' %}
-                                        <span class="badge bg-success" style="color: black">{{ task.status }}</span>
-                                    {% elseif task.status == 'В работе' %}
-                                        <span class="badge bg-warning" style="color: black">{{ task.status }}</span>
-                                    {% else %}
-                                        <span class="badge bg-primary" style="color: black">{{ task.status }}</span>
-                                    {% endif %}
+                                    {{ component('StatusComponent', {
+                                        status: task.status
+                                    }) }}
                                 </td>
                                 <td>{{ task.creator.username }}</td>
                             </tr>
