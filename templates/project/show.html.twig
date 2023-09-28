@@ -12,22 +12,61 @@
 {% block body %}
 
     <section class="section">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="buttons">
-                        <a href="{{ path('app_project_update', {'id': project.id}) }}" class="btn btn-outline-primary">Редактировать</a>
-                        <a href="{{ path('app_project_delete', {'id': project.id}) }}" class="btn btn-outline-danger">Удалить</a>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="buttons">
+                            <a href="{{ path('app_project_update', {'id': project.id}) }}" class="btn btn-outline-primary">Редактировать</a>
+                            <a href="{{ path('app_project_delete', {'id': project.id}) }}" class="btn btn-outline-danger">Удалить</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                Описание
+        <div class="row">
+            <div class="col-12 col-lg-2">
+                <div class="card">
+                    <div class="card-header">
+                        Статус
+                    </div>
+                    <div class="card-body">
+                        {% if project.status == 'Новый' %}
+                            <span class="badge bg-success" style="color: black">{{ project.status }}</span>
+                        {% elseif project.status == 'В работе' %}
+                            <span class="badge bg-warning" style="color: black">{{ project.status }}</span>
+                        {% else %}
+                            <span class="badge bg-primary" style="color: black">{{ project.status }}</span>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                {{ project.description }}
+            <div class="col-12 col-lg-2">
+                <div class="card">
+                    <div class="card-header">
+                        Задачи
+                    </div>
+                    <div class="button-mini">
+                        <a href="{{ path('app_task_add') }}" title="Создать новую задачу">
+                            <i class="iconly-boldPlus"></i>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        {{ project.tasks|length }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Описание
+                    </div>
+                    <div class="card-body">
+                        {{ project.description }}
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -30,3 +30,19 @@ body.theme-dark .buttons .btn, .buttons .btn {
         text-align: center!important;
     }
 }
+
+.button-mini {
+    position: absolute;
+    top: 25px;
+    right: 24px;
+}
+
+.button-mini a {
+    color: #198754!important;
+    font-size: 14px!important;
+}
+
+.button-mini .iconly-boldPlus {
+    font-size: 20px;
+}
+
