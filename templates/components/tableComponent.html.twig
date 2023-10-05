@@ -1,0 +1,28 @@
+{% if entity|length > 0 %}
+<table class="table" id="projects">
+    <thead>
+    <tr>
+        {% for name in column %}
+            <th>{{ name }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+
+        {% for item in entity %}
+            <tr>
+                {% for value in item|keys %}
+                    <td>
+                        {{ attribute(item, value) }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+    {% else %}
+        <div class="divider">
+            <div class="divider-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ничего не найдено.</font></font></div>
+        </div>
+{% endif %}
