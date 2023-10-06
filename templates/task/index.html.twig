@@ -26,13 +26,13 @@
                 {% if tasks|length > 0 %}
                     <table class="table" id="projects">
                         <thead>
-                        <tr>
-                            <td>#</td>
-                            <td>Наименование</td>
-                            <td>Проект</td>
-                            <td>Статус</td>
-                            <td>Создатель</td>
-                        </tr>
+                            <tr>
+                                <th>{{ knp_pagination_sortable(tasks, '#', 'id') }}</th>
+                                <th>{{ knp_pagination_sortable(tasks, 'Наименование', 'name') }}</th>
+                                <th>Проект</th>
+                                <th>Статус</th>
+                                <th>Создатель</th>
+                            </tr>
                         </thead>
                         <tbody>
 
@@ -65,7 +65,7 @@
                 {% endif %}
             </div>
         </div>
-
+        {{ knp_pagination_render(tasks) }}
     </section>
 
 

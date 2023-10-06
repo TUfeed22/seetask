@@ -7,6 +7,7 @@ use App\Entity\Project;
 use App\Enum\Status;
 use App\Form\AddAndUpdateProjectFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,14 +16,23 @@ class ProjectController extends BaseController
 {
     /**
      * Список проектов
+     * @param Request $request
+     * @param PaginatorInterface $paginator
      * @return Response
      */
     #[Route('/projects', name: 'app_project')]
-    public function index(): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
+        $projects = $this->getCurrentUser()->getProjects();
+        $pagination = $paginator->paginate(
+            $projects,
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render('project/index.html.twig', [
             'title' => 'Проекты',
-            'projects' => $this->getCurrentUser()->getProjects()
+            'projects' => $pagination
         ]);
     }
 

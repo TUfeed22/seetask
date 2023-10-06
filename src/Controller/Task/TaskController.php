@@ -3,13 +3,11 @@
 namespace App\Controller\Task;
 
 use App\Controller\BaseController;
-use App\Entity\Project;
 use App\Entity\Task;
 use App\Enum\Status;
-use App\Form\AddAndUpdateProjectFormType;
 use App\Form\AddAndUpdateTaskFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,11 +15,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends BaseController
 {
     #[Route('/tasks', name: 'app_task')]
-    public function index(): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
+        $tasks = $this->getCurrentUser()->getTasks();
+        $pagination = $paginator->paginate(
+            $tasks,
+            $request->query->getInt('page', 1),
+            5,
+            [
+                'defaultSortFieldName' => 'id',
+                'defaultSortDirection' => 'asc',
+            ]
+        );
+
         return $this->render('task/index.html.twig', [
             'title' => 'Задачи',
-            'tasks' => $this->getCurrentUser()->getTasks(),
+            'tasks' => $pagination,
         ]);
     }
 

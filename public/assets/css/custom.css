@@ -46,3 +46,7 @@ body.theme-dark .buttons .btn, .buttons .btn {
     font-size: 20px;
 }
 
+.margin-0 {
+    margin-bottom: 0px!important;
+}
+
