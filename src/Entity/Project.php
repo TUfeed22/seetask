@@ -119,4 +119,13 @@ class Project
 
         return $this;
     }
+
+    /**
+     * Кол-во задач привязанных к проекту
+     * @return int
+     */
+    public function getCountTasks()
+    {
+        return count($this->getTasks());
+    }
 }

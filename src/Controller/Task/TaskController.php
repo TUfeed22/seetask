@@ -6,6 +6,8 @@ use App\Controller\BaseController;
 use App\Entity\Task;
 use App\Enum\Status;
 use App\Form\AddAndUpdateTaskFormType;
+use App\Repository\TaskRepository;
+use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,23 +16,24 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends BaseController
 {
+    /**
+     * Список задач
+     *
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @param TaskRepository $taskRepository
+     * @param UserService $userService
+     * @return Response
+     */
     #[Route('/tasks', name: 'app_task')]
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request, PaginatorInterface $paginator, TaskRepository $taskRepository, UserService $userService): Response
     {
-        $tasks = $this->getCurrentUser()->getTasks();
-        $pagination = $paginator->paginate(
-            $tasks,
-            $request->query->getInt('page', 1),
-            5,
-            [
-                'defaultSortFieldName' => 'id',
-                'defaultSortDirection' => 'asc',
-            ]
-        );
+        $taskRepository->preparingObjectsByCreator($userService->getCurrentUser());
+        $startNumPage = $request->query->getInt('page', 1);
 
         return $this->render('task/index.html.twig', [
             'title' => 'Задачи',
-            'tasks' => $pagination,
+            'tasks' => $taskRepository->pagination($paginator, $startNumPage),
         ]);
     }
 

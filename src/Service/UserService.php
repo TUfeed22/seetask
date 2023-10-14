@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class Service
+class UserService
 {
     public function __construct(private Security $security)
     {

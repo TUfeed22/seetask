@@ -29,9 +29,9 @@
                             <tr>
                                 <th>{{ knp_pagination_sortable(tasks, '#', 'id') }}</th>
                                 <th>{{ knp_pagination_sortable(tasks, 'Наименование', 'name') }}</th>
-                                <th>Проект</th>
-                                <th>Статус</th>
-                                <th>Создатель</th>
+                                <th>{{ knp_pagination_sortable(tasks, 'Проект', 'project.name') }}</th>
+                                <th>{{ knp_pagination_sortable(tasks, 'Статус', 'status') }}</th>
+                                <th>{{ knp_pagination_sortable(tasks, 'Создатель', 'creator.username') }}</th>
                             </tr>
                         </thead>
                         <tbody>

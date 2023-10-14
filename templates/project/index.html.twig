@@ -27,11 +27,11 @@
                     <table class="table" id="projects">
                         <thead>
                         <tr>
-                            <td>#</td>
-                            <td>Наименование</td>
-                            <td>Кол-во задач</td>
-                            <td>Статус</td>
-                            <td>Создатель</td>
+                            <th>{{ knp_pagination_sortable(projects, '#', 'id') }}</th>
+                            <th>{{ knp_pagination_sortable(projects, 'Наименование', 'name') }}</th>
+                            <th>{{ knp_pagination_sortable(projects, 'Кол-во задач', 'getCountTasks') }}</th>
+                            <th>{{ knp_pagination_sortable(projects, 'Статус', 'status') }}</th>
+                            <th>{{ knp_pagination_sortable(projects, 'Создатель', 'creator.username') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                             <tr>
                                 <td>{{ project.id }}</td>
                                 <td><a href="{{ path('app_project_show', {'id': project.id}) }}">{{ project.name }}</a></td>
-                                <td>{{ project.tasks|length }}</td>
+                                <td>{{ project.getCountTasks }}</td>
                                 <td>
                                   {{ component('StatusComponent', {
                                       status: project.status

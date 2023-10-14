@@ -6,6 +6,8 @@ use App\Controller\BaseController;
 use App\Entity\Project;
 use App\Enum\Status;
 use App\Form\AddAndUpdateProjectFormType;
+use App\Repository\ProjectRepository;
+use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,21 +20,19 @@ class ProjectController extends BaseController
      * Список проектов
      * @param Request $request
      * @param PaginatorInterface $paginator
+     * @param UserService $userService
+     * @param ProjectRepository $projectRepository
      * @return Response
      */
     #[Route('/projects', name: 'app_project')]
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request, PaginatorInterface $paginator, UserService $userService, ProjectRepository $projectRepository): Response
     {
-        $projects = $this->getCurrentUser()->getProjects();
-        $pagination = $paginator->paginate(
-            $projects,
-            $request->query->getInt('page', 1),
-            5
-        );
+        $projectRepository->preparingObjectsByCreator($userService->getCurrentUser());
+        $startNumPage = $request->query->getInt('page', 1);
 
         return $this->render('project/index.html.twig', [
             'title' => 'Проекты',
-            'projects' => $pagination
+            'projects' => $projectRepository->pagination($paginator, $startNumPage),
         ]);
     }
 

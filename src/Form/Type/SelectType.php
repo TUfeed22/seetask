@@ -2,7 +2,7 @@
 
 namespace App\Form\Type;
 
-use App\Service\Service;
+use App\Service\UserService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,8 +12,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SelectType extends AbstractType
 {
-    private Service $service;
-    public function __construct(Service $service)
+    private UserService $service;
+    public function __construct(UserService $service)
     {
         $this->service = $service;
     }

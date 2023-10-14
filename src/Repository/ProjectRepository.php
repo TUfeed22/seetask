@@ -16,6 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProjectRepository extends ServiceEntityRepository
 {
+    use EntityRepository;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Project::class);

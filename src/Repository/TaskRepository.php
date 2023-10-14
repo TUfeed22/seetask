@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Task;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Cache\Traits\RedisTrait;
 
 /**
  * @extends ServiceEntityRepository<Task>
@@ -16,6 +20,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TaskRepository extends ServiceEntityRepository
 {
+    use EntityRepository;
+    private $allTasks;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Task::class);
