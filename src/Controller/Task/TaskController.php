@@ -6,6 +6,7 @@ use App\Controller\BaseController;
 use App\Entity\Task;
 use App\Enum\Status;
 use App\Form\AddAndUpdateTaskFormType;
+use App\Repository\ProjectRepository;
 use App\Repository\TaskRepository;
 use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,23 +45,12 @@ class TaskController extends BaseController
      * @return Response
      */
     #[Route('task/add', name: 'app_task_add')]
-    public function add(Request $request, EntityManagerInterface $entityManager): Response
+    public function add(Request $request, EntityManagerInterface $entityManager, ProjectRepository $projectRepository, UserService $userService): Response
     {
         $task = new Task();
-        // параметры для выпадающего списка проектов
-        $options = [
-            'options' => [
-                'Выбрать проект' => null // если проект не нужен
-            ],
-        ];
+        $projectRepository->preparingObjectsByCreator($userService->getCurrentUser());
 
-        $projects = $this->getCurrentUser()->getProjects();
-        // формируем список проектов доступных текущему пользователю
-        foreach ($projects as $project) {
-            $options['options'][$project->getName()] = $project;
-        }
-
-        $form = $this->createForm(AddAndUpdateTaskFormType::class, $task, $options);
+        $form = $this->createForm(AddAndUpdateTaskFormType::class, $task, $projectRepository->getOptionsToSelect());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -103,15 +93,17 @@ class TaskController extends BaseController
      * @return Response
      */
     #[Route('task/update/{id}', name: 'app_task_update', methods: ['GET', 'POST'])]
-    public function update(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    public function update(int $id, Request $request, EntityManagerInterface $entityManager, ProjectRepository $projectRepository, UserService $userService): Response
     {
         /**
          * @var Task $task
          */
 
         $task = $entityManager->find(Task::class, $id);
+        $projectRepository->preparingObjectsByCreator($userService->getCurrentUser());
 
-        $form = $this->createForm(AddAndUpdateTaskFormType::class, $task);
+        $form = $this->createForm(AddAndUpdateTaskFormType::class, $task, $projectRepository->getOptionsToSelect());
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

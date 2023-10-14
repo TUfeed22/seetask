@@ -34,7 +34,7 @@ class AddAndUpdateTaskFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-select'
                 ],
-                'choices' => $options['options'], // список имен проектов для select
+                'choices' => $options['options'],
             ])
         ;
     }

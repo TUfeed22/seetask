@@ -21,7 +21,7 @@ use Symfony\Component\Cache\Traits\RedisTrait;
 class TaskRepository extends ServiceEntityRepository
 {
     use EntityRepository;
-    private $allTasks;
+    private $allEntities;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Task::class);

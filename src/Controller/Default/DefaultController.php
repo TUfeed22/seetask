@@ -19,6 +19,7 @@ class DefaultController extends BaseController
             'title' => 'Информационная панель',
             'projects' => $user->getProjects(),
             'tasks' => $user->getTasks(),
+            'currentYear' => date("Y"),
         ]);
     }
 }

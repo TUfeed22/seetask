@@ -9,12 +9,12 @@ use Knp\Component\Pager\PaginatorInterface;
 trait EntityRepository
 {
     /**
-     * Подготовка задач по создателю
+     * Подготовка списка сущностей по создателю
      * @param User $user
      */
     public function preparingObjectsByCreator(User $user): void
     {
-        $this->allTasks = $this->findBy(['creator' => $user]);
+        $this->allEntities = $this->findBy(['creator' => $user]);
     }
 
     /**
@@ -32,10 +32,29 @@ trait EntityRepository
     ]): PaginationInterface
     {
         return $paginator->paginate(
-            $this->allTasks,
+            $this->allEntities,
             $startNumPage,
             $limit,
             $params
         );
+    }
+
+    /**
+     * Возвращает массив пригодный для формирования select для формы
+     *
+     * @return array
+     */
+    public function getOptionsToSelect(): array
+    {
+        $options = [
+            'options' => [
+                'Выбрать' => null // если не нужен
+            ],
+        ];
+
+        foreach ($this->allEntities as $entity) {
+            $options['options']['#' . $entity->getId() . ' ' . $entity->getName()] = $entity;
+        }
+        return $options;
     }
 }
