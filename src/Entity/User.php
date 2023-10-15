@@ -55,6 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'responsible', targetEntity: Task::class)]
     private Collection $tasksInWork;
 
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -254,5 +255,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Получить все задачи пользователя
+     *
+     * @return Task[]
+     */
+    public function getAllTasks(): array
+    {
+        return array_merge($this->getTasks()->toArray(), $this->getTasksInWork()->toArray());
     }
 }

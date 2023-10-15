@@ -19,11 +19,9 @@ class UserService
     public function getCurrentUser(): User
     {
         /**
-         * @var \App\Entity\User $user
+         * @var User $user
          */
         $user = $this->security->getUser();
         return $user;
     }
-
-
 }
