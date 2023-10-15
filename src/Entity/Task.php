@@ -31,6 +31,9 @@ class Task
     #[ORM\Column(length: 25)]
     private ?string $status = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tasksInWork')]
+    private ?User $responsible = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +95,18 @@ class Task
     public function setStatus(?string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getResponsible(): ?User
+    {
+        return $this->responsible;
+    }
+
+    public function setResponsible(?User $responsible): static
+    {
+        $this->responsible = $responsible;
 
         return $this;
     }

@@ -38,19 +38,23 @@
                 </div>
             </div>
             <div class="col-12 col-lg-2">
-                <div class="card">
-                    <div class="card-header">
-                        Задачи
+                <a href="{{ path('app_task') }}">
+                    <div class="card">
+                        <div class="card-header">
+                            Задачи
+                        </div>
+                        <div class="button-mini">
+                            <object>
+                                <a href="{{ path('app_task_add') }}" title="Создать новую задачу">
+                                    <i class="iconly-boldPlus"></i>
+                                </a>
+                            </object>
+                        </div>
+                        <div class="card-body">
+                            {{ project.tasks|length }}
+                        </div>
                     </div>
-                    <div class="button-mini">
-                        <a href="{{ path('app_task_add') }}" title="Создать новую задачу">
-                            <i class="iconly-boldPlus"></i>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        {{ project.tasks|length }}
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
         <div class="row">

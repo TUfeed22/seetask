@@ -52,10 +52,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Task::class)]
     private Collection $tasks;
 
+    #[ORM\OneToMany(mappedBy: 'responsible', targetEntity: Task::class)]
+    private Collection $tasksInWork;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
         $this->tasks = new ArrayCollection();
+        $this->tasksInWork = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -216,6 +220,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($task->getCreator() === $this) {
                 $task->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Task>
+     */
+    public function getTasksInWork(): Collection
+    {
+        return $this->tasksInWork;
+    }
+
+    public function addTasksInWork(Task $tasksInWork): static
+    {
+        if (!$this->tasksInWork->contains($tasksInWork)) {
+            $this->tasksInWork->add($tasksInWork);
+            $tasksInWork->setResponsible($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTasksInWork(Task $tasksInWork): static
+    {
+        if ($this->tasksInWork->removeElement($tasksInWork)) {
+            // set the owning side to null (unless already changed)
+            if ($tasksInWork->getResponsible() === $this) {
+                $tasksInWork->setResponsible(null);
             }
         }
 
