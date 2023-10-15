@@ -36,6 +36,7 @@ class TaskController extends BaseController
 
         return $this->render('task/index.html.twig', [
             'title' => 'Задачи',
+            'subtitle' => 'Список доступных задач',
             'tasks' => $taskRepository->pagination($paginator, $startNumPage),
         ]);
     }
@@ -68,7 +69,8 @@ class TaskController extends BaseController
         }
 
         return $this->render('task/add.html.twig', [
-            'title' => 'Создание новой задачи',
+            'title' => 'Новая задача',
+            'subtitle' => 'Создание новой задачи',
             'addAndUpdateTaskForm' => $form->createView()
         ]);
 
@@ -82,6 +84,7 @@ class TaskController extends BaseController
         $task = $entityManager->find(Task::class, $id);
         return $this->render('task/show.html.twig', [
             'title' => $task->getName(),
+            'subtitle' => 'Подробное описание задачи',
             'task' => $task
         ]);
     }
@@ -118,6 +121,7 @@ class TaskController extends BaseController
 
         return $this->render('task/update.html.twig', [
             'title' => $task->getName(),
+            'subtitle' => 'Редактирование задачи',
             'task' => $task,
             'addTaskForm' => $form->createView()
         ]);

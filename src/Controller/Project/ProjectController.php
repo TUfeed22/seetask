@@ -34,6 +34,7 @@ class ProjectController extends BaseController
 
         return $this->render('project/index.html.twig', [
             'title' => 'Проекты',
+            'subtitle' => 'Список доступных проектов',
             'projects' => $projectRepository->pagination($paginator, $startNumPage),
         ]);
     }
@@ -62,7 +63,8 @@ class ProjectController extends BaseController
         }
 
         return $this->render('project/add.html.twig', [
-            'title' => 'Создание нового проекта',
+            'title' => 'Новый проект',
+            'subtitle' => 'Создание нового проекта',
             'addProjectForm' => $form->createView()
         ]);
 
@@ -84,6 +86,7 @@ class ProjectController extends BaseController
         $project = $entityManager->find(Project::class, $id);
         return $this->render('project/show.html.twig', [
             'title' => $project->getName(),
+            'subtitle' => 'Подробная информация о проекте',
             'project' => $project
         ]);
     }
@@ -118,6 +121,7 @@ class ProjectController extends BaseController
 
         return $this->render('project/update.html.twig', [
             'title' => $project->getName(),
+            'subtitle' => 'Редактирование проекта',
             'project' => $project,
             'addProjectForm' => $form->createView()
         ]);
