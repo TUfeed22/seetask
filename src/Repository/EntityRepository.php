@@ -26,7 +26,7 @@ trait EntityRepository
      * @param string[] $params параметры отображения по умолчанию
      * @return PaginationInterface
      */
-    public function pagination(PaginatorInterface $paginator, $startNumPage, int $limit = 5, array $params = [
+    public function pagination(PaginatorInterface $paginator, $startNumPage, int $limit = 6, array $params = [
         'defaultSortFieldName' => 'id',
         'defaultSortDirection' => 'desc',
     ]): PaginationInterface

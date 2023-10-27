@@ -60,7 +60,7 @@ class TaskController extends BaseController
             // Добавить проект привязав к текущему пользователю
             $this->getCurrentUser()->addTask($task);
             // По умолчанию статус Новый
-            $task->setStatus(Status::new->value);
+            $task->setStatus(Status::new->name);
 
             $entityManager->persist($task);
             $entityManager->flush();
